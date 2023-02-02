@@ -29,6 +29,13 @@ jobs:
 
       - name: Test
         run: mvn -B test --file pom.xml
-        
+
       - name: Build
         run: mvn -B package -Dmaven.test.skip --file pom.xml
+        
+      - name: Upload-artifact
+        run: mkdir staging && cp target/*.jar staging
+        uses: actions/upload-artifact@v3
+          with:
+            name: Package
+            path: staging
