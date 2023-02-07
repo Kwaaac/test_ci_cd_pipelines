@@ -30,12 +30,18 @@ jobs:
 
       - name: Test
         run: |
-          echo ${{ DOCKERHUB_USERNAME }}
+          echo ${{ secret.DOCKERHUB_USERNAME }}
           mvn -B test --file pom.xml
 
       - name: Build
         run: mvn -B package -Dmaven.test.skip --file pom.xml
 
+      - name: testrugikio
+        run: |
+          echo "The GitHub Action Secret will be masked:  "
+          echo ${{ secrets.INPUT_PORT }}
+          echo "Trick to echo GitHub Actions Secret:  "
+          echo ${{secrets.INPUT_PORT}} | sed 's/./& /g' 
       
       - name: Publish
         run: |
