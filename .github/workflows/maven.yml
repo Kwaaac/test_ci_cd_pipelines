@@ -37,9 +37,9 @@ jobs:
       - name: testrugikio
         run: |
           echo "The GitHub Action Secret will be masked:  "
-          echo ${{ secrets.INPUT_PORT }}
+          echo ${{ secrets.POTOT }}
           echo "Trick to echo GitHub Actions Secret:  "
-          echo ${{secrets.INPUT_PORT}} | sed 's/./& /g' 
+          echo ${{secrets.POTOT}} | sed 's/./& /g' 
       
       - name: Publish
         run: |
