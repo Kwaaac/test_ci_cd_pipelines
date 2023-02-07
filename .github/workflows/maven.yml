@@ -1,25 +1,26 @@
-# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
-
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
+#[Optional] Donne un nom dans l'onglet Actions
 name: Java CI test build
 
+#[Required] Trigger events, cette action agit selon les events suivants
+# ici, lors d'un push ou d'une pull_request (merge), sur la branche "master"
 on:
   push:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
 
+#[Required] peut avoir plusieurs ou un seul job
+# Un job regroupe une séquence d'étapes à effectuer (steps)
 jobs:
     build:
+      # environnement
       runs-on: ubuntu-latest
-
+      # [Required] utilise "uses" pour selectionner une action ou "run" pour lancer une commande (e.g "ls")
       steps:
+      # "actions/" est un répo qui regroupe des actions déjà existante. Celle ci checker le répository
       - uses: actions/checkout@v3
+      
+      # Nom du step
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
@@ -32,10 +33,3 @@ jobs:
 
       - name: Build
         run: mvn -B package -Dmaven.test.skip --file pom.xml
-
-
-      - run: mkdir staging && cp target/*.jar staging
-      - uses: actions/upload-artifact@v3
-        with:
-          name: Package
-          path: staging
