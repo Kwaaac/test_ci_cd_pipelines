@@ -39,7 +39,7 @@ jobs:
         with:
           image: kwaaac/ci_cd_pipeline
           registry: docker.io
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          username: kwaaac
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
           
